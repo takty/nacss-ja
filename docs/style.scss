@@ -1,0 +1,56 @@
+html {
+	scroll-behavior   : smooth;
+	scroll-padding-top: 8rem;
+
+	font-family: sans-serif;
+}
+
+header,
+main {
+	margin-inline: auto;
+	width : min(calc(100% - 2vw), 48rem);
+}
+
+header {
+	position: sticky;
+	top     : 0;
+	z-index : 1;
+	height  : 6rem;
+
+	border          : 1px solid #ddd;
+	background-color: rgba(#fff, 0.5);
+	backdrop-filter : blur(4px);
+}
+
+textarea {
+	width      : 100%;
+	line-height: 1.5;
+}
+
+button {
+	padding: 0.5rem 0.75rem;
+}
+
+.kerning span {
+	background: rgba(red, 0.15);
+}
+
+.kerning:hover span {
+	background: rgba(red, 0.45);
+}
+
+.segmenter, .segmenter-old {
+	span:not([data-nc-kern]) {
+		display: inline-block;
+		margin: 0 0.25rem 0.15rem 0;
+		background-position: left bottom;
+	}
+	> span { background-image: linear-gradient(to right, rgba(red, 0.15) 0%, rgba(red, 0.15) 100%); }
+	> * > span { background-image: linear-gradient(to right, rgba(blue, 0.15) 0%, rgba(blue, 0.15) 100%); }
+
+	&:hover {
+		> span { background-image: linear-gradient(to right, rgba(red, 0.45) 0%, rgba(red, 0.15) 100%); }
+		> * > span { background-image: linear-gradient(to right, rgba(blue, 0.45) 0%, rgba(blue, 0.15) 100%); }
+	}
+}
+

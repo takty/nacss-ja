@@ -1,0 +1,17 @@
+/**
+ *
+ * Style for Japanese Text
+ *
+ * @author Takuto Yanagida
+ * @version 2021-11-03
+ *
+ */
+
+
+span[data-nc-kern *= 's'] {
+	letter-spacing: -0.4em;
+}
+
+span[data-nc-kern *= 'h'] {
+	margin-left: -0.4rem;
+}

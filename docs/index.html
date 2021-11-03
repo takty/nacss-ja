@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>nacss-ja</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.min.css?v005231t">
+<link rel="stylesheet" href="css/ja.min.css?v005231t">
+<script src="js/ja.min.js?v005231t"></script>
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		NACSS.jaSegmenterOld(document.querySelectorAll('#segmented-result-old'));
+
+		NACSS.jaSegmenter(document.querySelectorAll('.segmenter'));
+		NACSS.jaKerning(document.querySelectorAll('.kerning'));
+	});
+</script>
+</head>
+
+<body>
+	<header role="banner">
+		<h1>Ja</h1>
+	</header>
+
+	<main>
+		<h2>Segmenter</h2>
+
+		<p id="segmented-result-old" class="segmenter-old">
+			【【サンプルテキスト】】アプリの「クロッキー（Croqujs）」というお名前は、
+			11月3日にとあるフランス語で「クロッキー帳（デッサンの練習を【するためのあらゆる】<strong>『スケッチ・ブック』</strong>のようなもの）」を表す「Croquis」に、
+			「ジャバスクリプト<strong>（JavaScript: JS）</strong>」をもじって付けられました。〔ジャバスクリプト用の〕〔クロッキー帳〕という意味です。
+		</p>
+		<p id="segmented-result" class="segmenter">
+			【【サンプルテキスト】】アプリの「クロッキー（Croqujs）」というお名前は、
+			11月3日にとあるフランス語で「クロッキー帳（デッサンの練習を【するためのあらゆる】<strong>『スケッチ・ブック』</strong>のようなもの）」を表す「Croquis」に、
+			「ジャバスクリプト<strong>（JavaScript: JS）</strong>」をもじって付けられました。〔ジャバスクリプト用の〕〔クロッキー帳〕という意味です。
+		</p>
+		<div>
+			<textarea id="segmented-text" rows="4" placeholder="Enter text">【【サンプルテキスト】】アプリの「クロッキー（Croqujs）」というお名前は、11月3日にとあるフランス語で「クロッキー帳（デッサンの練習を【するためのあらゆる】『スケッチ・ブック』のようなもの）」を表す「Croquis」に、「ジャバスクリプト（JavaScript: JS）」をもじって付けられました。〔ジャバスクリプト用の〕〔クロッキー帳〕という意味です。</textarea>
+			<button id="apply-segmenter">Apply Segmenter</button>
+		</div>
+		<script>
+			document.getElementById('apply-segmenter').addEventListener('click', () => {
+				const t = document.getElementById('segmented-text').value;
+				document.getElementById('segmented-result-old').innerHTML = NACSS.jaApplySegmenterOld(t);
+
+				const df = NACSS.jaApplySegmenter(t);
+				const p = document.getElementById('segmented-result');
+				p.innerHTML = '';
+				if (df) p.appendChild(df);
+			});
+		</script>
+
+		<h2>Kerning</h2>
+
+		<p id="kerning-result" class="kerning">
+			【【サンプルテキスト】】アプリの「クロッキー（Croqujs）」というお名前は、
+			11月3日にとあるフランス語で「クロッキー帳（デッサンの練習を【するためのあらゆる】<strong>『スケッチ・ブック』</strong>のようなもの）」を表す「Croquis」に、
+			「ジャバスクリプト<strong>（JavaScript: JS）</strong>」をもじって付けられました。〔ジャバスクリプト用の〕〔クロッキー帳〕という意味です。
+		</p>
+		<div>
+			<textarea id="kerning-text" rows="4" placeholder="Enter text">【【サンプルテキスト】】アプリの「クロッキー（Croqujs）」というお名前は、11月3日にとあるフランス語で「クロッキー帳（デッサンの練習を【するためのあらゆる】『スケッチ・ブック』のようなもの）」を表す「Croquis」に、「ジャバスクリプト（JavaScript: JS）」をもじって付けられました。〔ジャバスクリプト用の〕〔クロッキー帳〕という意味です。</textarea>
+			<button id="apply-kerning">Apply Kerning</button>
+		</div>
+		<script>
+			document.getElementById('apply-kerning').addEventListener('click', () => {
+				const t = document.getElementById('kerning-text').value;
+				const df = NACSS.jaApplyKerning(t);
+				const p = document.getElementById('kerning-result');
+				p.innerHTML = '';
+				if (df) p.appendChild(df);
+			});
+		</script>
+
+		<h2>Segmenter & Kerning</h2>
+
+		<p id="segmenter-kerning-result" class="segmenter kerning">
+			【【サンプルテキスト】】アプリの「クロッキー（Croqujs）」というお名前は、
+			11月3日にとあるフランス語で「クロッキー帳（デッサンの練習を【するためのあらゆる】<strong>『スケッチ・ブック』</strong>のようなもの）」を表す「Croquis」に、
+			「ジャバスクリプト<strong>（JavaScript: JS）</strong>」をもじって付けられました。〔ジャバスクリプト用の〕〔クロッキー帳〕という意味です。
+		</p>
+		<div>
+			<textarea id="segmenter-kerning-text" rows="4"
+				placeholder="Enter text">【【サンプルテキスト】】アプリの「クロッキー（Croqujs）」というお名前は、11月3日にとあるフランス語で「クロッキー帳（デッサンの練習を【するためのあらゆる】『スケッチ・ブック』のようなもの）」を表す「Croquis」に、「ジャバスクリプト（JavaScript: JS）」をもじって付けられました。〔ジャバスクリプト用の〕〔クロッキー帳〕という意味です。</textarea>
+			<button id="apply-segmenter-kerning">Apply Segmenter & Kerning</button>
+		</div>
+		<script>
+			document.getElementById('apply-segmenter-kerning').addEventListener('click', () => {
+				const t = document.getElementById('segmenter-kerning-text').value;
+				const df = NACSS.jaApplySegmenter(t);
+				const p = document.getElementById('segmenter-kerning-result');
+				p.innerHTML = '';
+				if (df) {
+					p.appendChild(df);
+					NACSS.jaKerning([p]);
+				}
+			});
+		</script>
+	</main>
+
+</body>
+</html>

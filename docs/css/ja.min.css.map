@@ -1,0 +1,1 @@
+{"version":3,"sources":["ja.scss"],"names":[],"mappings":"AAUA,sBACC,qBAAA,CAGD,sBACC,mBAAA","file":"ja.min.css","sourcesContent":["/**\n *\n * Style for Japanese Text\n *\n * @author Takuto Yanagida\n * @version 2021-11-03\n *\n */\n\n\nspan[data-nc-kern *= 's'] {\n\tletter-spacing: -0.4em;\n}\n\nspan[data-nc-kern *= 'h'] {\n\tmargin-left: -0.4rem;\n}\n"]}
