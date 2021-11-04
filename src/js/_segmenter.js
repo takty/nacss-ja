@@ -15,7 +15,9 @@ function initialize(ts, opts = {}) {
 		styleSegment        : '',
 		styleDisabled       : ':ncNoSegmentation',
 		doDisableOnSelecting: true,
+		properNouns         : [],
 	}, opts);
+	sortProperNouns(opts);
 
 	for (const t of ts) {
 		segmentElement(t, opts);
@@ -46,10 +48,20 @@ function apply(str, opts = {}) {
 	opts = Object.assign({
 		styleSegment : '',
 		styleDisabled: ':ncNoSegmentation',
+		properNouns  : [],
 	}, opts);
+	sortProperNouns(opts);
 
-	const [ts, ws] = getSegment(str);
+	const [ts, ws] = getSegment(str, opts.properNouns);
 	return createFragment(str, ts, ws, opts);
+}
+
+function sortProperNouns(opts) {
+	const pns = opts['properNouns'].map(e => Array.from(e));
+	pns.sort((a, b) => {
+		return b.length - a.length;
+	});
+	opts['properNouns'] = pns;
 }
 
 
@@ -70,7 +82,7 @@ function segmentTextNode(tn, opts) {
 	let str = tn.textContent;
 	str = removeWhiteSpacesBetweenZenChars(str);
 
-	const [ts, ws] = getSegment(str);
+	const [ts, ws] = getSegment(str, opts.properNouns);
 	const f = createFragment(str, ts, ws, opts);
 	tn.parentNode.replaceChild(f, tn);
 }
@@ -86,19 +98,20 @@ const AI1       = 'がおこな,のような,があり,がおき,ができ,が�
 const PRE_KANJI = 'お,ご'.split(',');
 const PRE_NUM   = '第,約'.split(',');
 
-function getSegment(str) {
+function getSegment(str, properNouns) {
 	const ts = createCharTypeArray(str);
 	const ws = Array(ts.length).fill(0);
 
 	weightByCharTypes(ts, ws);
 
 	const strA = Array.from(str);
-	divideByPhrases(strA, ws, IW);
-	concatByPhrases(strA, ws, AW);
+	if (properNouns.length) weightByPhrases(strA, ws, properNouns, -1);  // Divide
+	weightByPhrases(strA, ws, IW, -1);  // Divide
+	weightByPhrases(strA, ws, AW, 1);  // Concat
 
-	divideByCombinedPhrases(strA, ws, AI1, 1);
-	weightByPhrases(strA, ts, ws, PRE_KANJI, CLS_ALL,      'H', -1, 2);
-	weightByPhrases(strA, ts, ws, PRE_NUM,   CLS_WO_KANJI, 'N',  0, 2);
+	weightByPhrases(strA, ws, AI1, -1, 1);  // Divide with offset
+	weightByPhraseAndType(strA, ts, ws, PRE_KANJI, CLS_ALL,      'H', -1, 2);
+	weightByPhraseAndType(strA, ts, ws, PRE_NUM,   CLS_WO_KANJI, 'N',  0, 2);
 
 	return [ts, ws];
 }
@@ -215,7 +228,26 @@ function concatByPhrases(strA, ws, phrases) {
 	}
 }
 
-function weightByPhrases(strA, ts, ws, phrases, prevCts, nextCts, prevW, nextW) {
+function weightByPhrases(strA, ws, phrases, factor, offset = 0) {
+	for (const ph of phrases) {
+		const phA = Array.from(ph);
+		const phL = phA.length;
+
+		for (let bgn = 0;;) {
+			const idx0 = indexOfArray(strA, phA, bgn);
+			if (idx0 === -1) break;
+			const idx1 = idx0 + phL;
+
+			ws[idx0 + offset] += (phL - offset) * factor;
+			for (let i = 1; i < phL - offset; i += 1) {
+				ws[idx0 + offset + i] += (phL - offset);
+			}
+			bgn = idx1;
+		}
+	}
+}
+
+function weightByPhraseAndType(strA, ts, ws, phrases, prevCts, nextCts, prevW, nextW) {
 	const tsL = ts.length;
 
 	for (const ph of phrases) {
