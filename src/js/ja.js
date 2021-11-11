@@ -3,7 +3,7 @@
  * Style for Japanese Text (JS)
  *
  * @author Takuto Yanagida
- * @version 2021-11-04
+ * @version 2021-11-11
  *
  */
 
@@ -25,7 +25,7 @@ window['NACSS'] = window['NACSS'] || {};
 		NS.jaApplySegmenter = apply;
 	})();
 
-	// @include _utility.js
+	// @include _style-class.js
 	// @include _common.js
 
 })(window['NACSS']);

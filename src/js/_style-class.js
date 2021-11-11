@@ -1,9 +1,9 @@
 /**
  *
- * Utilities
+ * Style Class Utilities
  *
  * @author Takuto Yanagida
- * @version 2021-11-03
+ * @version 2021-11-11
  *
  */
 
@@ -26,10 +26,19 @@ function setClass(tar, cls, enabled = true, val = '') {
 			delete tar.dataset[key];
 		}
 	} else {
+		const c = [key, val].join('-');
 		if (enabled) {
-			tar.classList.add([key, val].join('-'));
+			tar.classList.add(c);
 		} else {
-			tar.classList.remove([key, val].join('-'));
+			tar.classList.remove(c);
 		}
+	}
+}
+
+function getSelector(cls) {
+	if (cls.startsWith(':')) {
+		return `*[data-${cls.substr(1).replace(/([A-Z])/g, c => '-' + c.charAt(0).toLowerCase())}]`;
+	} else {
+		return `*${cls}`;
 	}
 }
