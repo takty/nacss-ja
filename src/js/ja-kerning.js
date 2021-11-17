@@ -1,6 +1,6 @@
 /**
  *
- * Style for Japanese Text - Kerning (JS)
+ * Japanese Text - Kerning
  *
  * @author Takuto Yanagida
  * @version 2021-11-11

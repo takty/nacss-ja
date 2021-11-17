@@ -1,6 +1,6 @@
 /**
  *
- * Style for Japanese Text (JS)
+ * Japanese Text
  *
  * @author Takuto Yanagida
  * @version 2021-11-11

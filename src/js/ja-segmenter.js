@@ -1,6 +1,6 @@
 /**
  *
- * Style for Japanese Text - Segmenter (JS)
+ * Japanese Text - Segmenter
  *
  * @author Takuto Yanagida
  * @version 2021-11-11
