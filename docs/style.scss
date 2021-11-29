@@ -39,8 +39,10 @@ button {
 	background: rgba(red, 0.15);
 }
 
-.kerning:hover span {
-	background: rgba(red, 0.45);
+@media (hover: hover) {
+	.kerning:hover span {
+		background: rgba(red, 0.45);
+	}
 }
 
 .segmenter, .segmenter-old {
@@ -52,9 +54,11 @@ button {
 	> span { background-image: linear-gradient(to right, rgba(red, 0.15) 0%, rgba(red, 0.15) 100%); }
 	> * > span { background-image: linear-gradient(to right, rgba(blue, 0.15) 0%, rgba(blue, 0.15) 100%); }
 
-	&:hover {
-		> span { background-image: linear-gradient(to right, rgba(red, 0.45) 0%, rgba(red, 0.15) 100%); }
-		> * > span { background-image: linear-gradient(to right, rgba(blue, 0.45) 0%, rgba(blue, 0.15) 100%); }
+	@media (hover: hover) {
+		&:hover {
+			> span { background-image: linear-gradient(to right, rgba(red, 0.45) 0%, rgba(red, 0.15) 100%); }
+			> * > span { background-image: linear-gradient(to right, rgba(blue, 0.45) 0%, rgba(blue, 0.15) 100%); }
+		}
 	}
 }
 
