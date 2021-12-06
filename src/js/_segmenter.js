@@ -3,7 +3,7 @@
  * Segmenter
  *
  * @author Takuto Yanagida
- * @version 2021-11-04
+ * @version 2021-12-06
  *
  */
 
@@ -21,11 +21,11 @@ function initialize(ts, opts = {}) {
 
 	for (const t of ts) {
 		segmentElement(t, opts);
-		if (opts.doDisableOnSelecting) {
-			const f = function () {
+		if (opts['doDisableOnSelecting']) {
+			const f = () => {
 				removeSegment(t, opts);
 				t.removeEventListener('selectstart', f);
-			}
+			};
 			t.addEventListener('selectstart', f);
 		}
 	}

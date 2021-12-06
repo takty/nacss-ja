@@ -3,7 +3,7 @@
  * Kerning
  *
  * @author Takuto Yanagida
- * @version 2021-11-03
+ * @version 2021-12-06
  *
  */
 
@@ -20,11 +20,11 @@ function initialize(ts, opts = {}) {
 
 	for (const t of ts) {
 		kernElement(t, dict, opts);
-		if (opts.doAssignAttribute && opts.doDisableOnSelecting) {
-			const f = function () {
+		if (opts['doAssignAttribute'] && opts['doDisableOnSelecting']) {
+			const f = () => {
 				removeKerning(t, opts);
 				t.removeEventListener('selectstart', f);
-			}
+			};
 			t.addEventListener('selectstart', f);
 		}
 	}
