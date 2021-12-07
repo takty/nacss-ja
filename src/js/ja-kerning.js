@@ -3,7 +3,7 @@
  * Japanese Text - Kerning
  *
  * @author Takuto Yanagida
- * @version 2021-12-06
+ * @version 2021-12-07
  *
  */
 
@@ -19,7 +19,7 @@ window['NACSS'] = window['NACSS'] || {};
 	NS.jaKerning      = initialize;
 	NS.jaApplyKerning = apply;
 
-	// @include _style-class.js
 	// @include _common.js
+	// @include _style-class.js
 
 })(window['NACSS']);
