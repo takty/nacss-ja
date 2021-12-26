@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <title>nacss-ja</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/style.min.css?v225958t">
-<link rel="stylesheet" href="css/ja.min.css?v225958t">
-<script src="js/ja.min.js?v225958t"></script>
+<link rel="stylesheet" href="css/style.min.css?v140312t">
+<link rel="stylesheet" href="css/ja.min.css?v140312t">
+<script src="js/ja.min.js?v140312t"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
 		const opts = { properNouns: ['総合研究院', '大学院', '超高度科学研究科'] }
-		NACSS.jaSegmenter(document.querySelectorAll('.segmenter'), opts);
-		NACSS.jaKerning(document.querySelectorAll('.kerning'));
+		NACSS.ja.applySegmenter(document.querySelectorAll('.segmenter'), opts);
+		NACSS.ja.applyKerning(document.querySelectorAll('.kerning'));
 	});
 </script>
 </head>
@@ -44,7 +44,7 @@
 			document.getElementById('apply-segmenter').addEventListener('click', () => {
 				const t = document.getElementById('segmenter-text').value;
 				const pn = document.getElementById('segmenter-pn').value.split('\n').map(e => e.trim()).filter(e => e.length);
-				const df = NACSS.jaApplySegmenter(t, { properNouns: pn });
+				const df = NACSS.ja.applySegmenterToString(t, { properNouns: pn });
 
 				const p = document.getElementById('segmenter-result');
 				p.innerHTML = '';
@@ -69,7 +69,7 @@
 		<script>
 			document.getElementById('apply-kerning').addEventListener('click', () => {
 				const t = document.getElementById('kerning-text').value;
-				const df = NACSS.jaApplyKerning(t);
+				const df = NACSS.ja.applyKerningToString(t);
 
 				const p = document.getElementById('kerning-result');
 				p.innerHTML = '';
@@ -98,13 +98,13 @@
 			document.getElementById('apply-segmenter-kerning').addEventListener('click', () => {
 				const t = document.getElementById('segmenter-kerning-text').value;
 				const pn = document.getElementById('segmenter-kerning-pn').value.split('\n').map(e => e.trim()).filter(e => e.length);
-				const df = NACSS.jaApplySegmenter(t, { properNouns: pn });
+				const df = NACSS.ja.applySegmenterToString(t, { properNouns: pn });
 
 				const p = document.getElementById('segmenter-kerning-result');
 				p.innerHTML = '';
 				if (df) {
 					p.appendChild(df);
-					NACSS.jaKerning([p]);
+					NACSS.ja.applyKerning([p]);
 				}
 			});
 		</script>
