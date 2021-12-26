@@ -3,23 +3,25 @@
  * Japanese Text - Segmenter
  *
  * @author Takuto Yanagida
- * @version 2021-12-07
+ * @version 2021-12-26
  *
  */
 
 
 'use strict';
 
-window['NACSS'] = window['NACSS'] || {};
+window['NACSS']       = window['NACSS']       || {};
+window['NACSS']['ja'] = window['NACSS']['ja'] || {};
 
 
-(function (NS) {
+((NS) => {
+
+	// @include __style-class.js
 
 	// @include _segmenter.js
-	NS.jaSegmenter      = initialize;
-	NS.jaApplySegmenter = apply;
+	NS.applySegmenter         = initialize;
+	NS.applySegmenterToString = applyToString;
 
 	// @include _common.js
-	// @include _style-class.js
 
-})(window['NACSS']);
+})(window['NACSS']['ja']);

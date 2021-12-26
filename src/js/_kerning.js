@@ -3,12 +3,12 @@
  * Kerning
  *
  * @author Takuto Yanagida
- * @version 2021-12-06
+ * @version 2021-12-26
  *
  */
 
 
-function initialize(ts, opts = {}) {
+function apply(ts, opts = {}) {
 	if (ts.length === 0) return;
 
 	opts = Object.assign({
@@ -42,7 +42,7 @@ function removeKerning(elm, opts) {
 	}
 }
 
-function apply(str, opts = {}) {
+function applyToString(str, opts = {}) {
 	opts = Object.assign({
 		styleKerning     : ':ncKern',
 		styleDisabled    : ':ncNoKerning',
