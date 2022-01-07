@@ -3,7 +3,7 @@
  * Segmenter
  *
  * @author Takuto Yanagida
- * @version 2021-12-26
+ * @version 2022-01-07
  *
  */
 
@@ -33,10 +33,10 @@ function apply(ts, opts = {}) {
 
 function removeSegment(elm, opts) {
 	const sty = opts.styleSegment;
-	for (const s of Array.from(elm.getElementsByTagName('span'))) {
+	for (const s of [...elm.getElementsByTagName('span')]) {
 		if ((sty.length === 0 && s.className === '') || hasClass(s, sty)) {
 			const df = document.createDocumentFragment();
-			for (const c of Array.from(s.childNodes)) {
+			for (const c of [...s.childNodes]) {
 				df.appendChild(c);
 			}
 			s.parentNode.replaceChild(df, s);
@@ -57,7 +57,7 @@ function applyToString(str, opts = {}) {
 }
 
 function sortProperNouns(opts) {
-	const pns = opts['properNouns'].map(e => Array.from(e));
+	const pns = opts['properNouns'].map(e => [...e]);
 	pns.sort((a, b) => {
 		return b.length - a.length;
 	});
@@ -69,7 +69,7 @@ function sortProperNouns(opts) {
 
 
 function segmentElement(elm, opts) {
-	for (const c of Array.from(elm.childNodes)) {
+	for (const c of [...elm.childNodes]) {
 		if (c.nodeType === 1) {  // ELEMENT_NODE
 			if (!hasClass(c, opts.styleDisabled)) segmentElement(c, opts);
 		} else if (c.nodeType === 3) {  // TEXT_NODE
@@ -104,7 +104,7 @@ function getSegment(str, properNouns) {
 
 	weightByCharTypes(ts, ws);
 
-	const strA = Array.from(str);
+	const strA = [...str];
 	if (properNouns.length) weightByPhrases(strA, ws, properNouns, -1);  // Divide
 	weightByPhrases(strA, ws, IW, -1);  // Divide
 	weightByPhrases(strA, ws, AW, 1);  // Concat
@@ -179,7 +179,7 @@ function weightByCharTypes(ts, ws) {
 
 function divideByPhrases(strA, ws, phrases) {
 	for (const ph of phrases) {
-		const phA = Array.from(ph);
+		const phA = [...ph];
 		const phL = phA.length;
 
 		for (let bgn = 0;;) {
@@ -196,7 +196,7 @@ function divideByPhrases(strA, ws, phrases) {
 
 function divideByCombinedPhrases(strA, ws, phrases, al) {
 	for (const ph of phrases) {
-		const phA = Array.from(ph);
+		const phA = [...ph];
 		const phL = phA.length;
 
 		for (let bgn = 0;;) {
@@ -213,7 +213,7 @@ function divideByCombinedPhrases(strA, ws, phrases, al) {
 
 function concatByPhrases(strA, ws, phrases) {
 	for (const ph of phrases) {
-		const phA = Array.from(ph);
+		const phA = [...ph];
 		const phL = phA.length;
 
 		for (let bgn = 0; ;) {
@@ -230,7 +230,7 @@ function concatByPhrases(strA, ws, phrases) {
 
 function weightByPhrases(strA, ws, phrases, factor, offset = 0) {
 	for (const ph of phrases) {
-		const phA = Array.from(ph);
+		const phA = [...ph];
 		const phL = phA.length;
 
 		for (let bgn = 0;;) {
@@ -251,7 +251,7 @@ function weightByPhraseAndType(strA, ts, ws, phrases, prevCts, nextCts, prevW, n
 	const tsL = ts.length;
 
 	for (const ph of phrases) {
-		const phA = Array.from(ph);
+		const phA = [...ph];
 		const phL = phA.length;
 
 		for (let bgn = 0; ;) {

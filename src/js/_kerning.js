@@ -3,7 +3,7 @@
  * Kerning
  *
  * @author Takuto Yanagida
- * @version 2021-12-26
+ * @version 2022-01-07
  *
  */
 
@@ -31,10 +31,10 @@ function apply(ts, opts = {}) {
 }
 
 function removeKerning(elm, opts) {
-	for (const s of Array.from(elm.getElementsByTagName('span'))) {
+	for (const s of [...elm.getElementsByTagName('span')]) {
 		if (hasClass(s, opts.styleKerning)) {
 			const df = document.createDocumentFragment();
-			for (const c of Array.from(s.childNodes)) {
+			for (const c of [...s.childNodes]) {
 				df.appendChild(c);
 			}
 			s.parentNode.replaceChild(df, s);
@@ -61,7 +61,7 @@ function applyToString(str, opts = {}) {
 
 
 function kernElement(elm, dict, opts) {
-	for (const c of Array.from(elm.childNodes)) {
+	for (const c of [...elm.childNodes]) {
 		if (c.nodeType === 1) {  // ELEMENT_NODE
 			if (!hasClass(c, opts.styleDisabled)) kernElement(c, dict, opts);
 		} else if (c.nodeType === 3) {  // TEXT_NODE
@@ -154,11 +154,11 @@ function isPreviousBlockGreedy(n) {
 
 
 function getKerning(str, dict, isHead, nextNodeText, assignAttr) {
-	let strArray = Array.from(str);
+	let strArray = [...str];
 	const ret = [];
 
 	if (nextNodeText.length) {
-		strArray = strArray.concat(Array.from(nextNodeText));
+		strArray = strArray.concat([...nextNodeText]);
 	}
 	let l = 0;
 
@@ -188,7 +188,7 @@ function getKerning(str, dict, isHead, nextNodeText, assignAttr) {
 }
 
 function createFragment(str, ks, opts) {
-	const strArray = Array.from(str);
+	const strArray = [...str];
 	const f = document.createDocumentFragment();
 	let i = 0;
 	for (const k of ks) {
