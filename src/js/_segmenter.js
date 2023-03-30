@@ -1,12 +1,9 @@
 /**
- *
  * Segmenter
  *
  * @author Takuto Yanagida
  * @version 2022-05-27
- *
  */
-
 
 function apply(ts, opts = {}) {
 	if (ts.length === 0) return;

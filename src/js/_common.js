@@ -1,12 +1,9 @@
 /**
- *
  * Common Functions
  *
  * @author Takuto Yanagida
  * @version 2021-11-03
- *
  */
-
 
 function removeHeadWhiteSpaces(str) {
 	const mzs = str.match(/^[\n\r\t ]*(\u3000*)/);
