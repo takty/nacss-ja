@@ -1,12 +1,9 @@
 /**
- *
  * Kerning
  *
  * @author Takuto Yanagida
- * @version 2022-01-07
- *
+ * @version 2023-03-30
  */
-
 
 function apply(ts, opts = {}) {
 	if (ts.length === 0) return;
@@ -14,9 +11,11 @@ function apply(ts, opts = {}) {
 	opts = Object.assign({
 		styleKerning        : ':ncKern',
 		styleDisabled       : ':ncNoKerning',
+		ignoredTags         : ['PRE'],
 		doAssignAttribute   : true,
 		doDisableOnSelecting: true,
 	}, opts);
+	opts.ignoredTags = opts.ignoredTags.map(e => e.toUpperCase());
 
 	for (const t of ts) {
 		kernElement(t, dict, opts);
@@ -63,7 +62,9 @@ function applyToString(str, opts = {}) {
 function kernElement(elm, dict, opts) {
 	for (const c of [...elm.childNodes]) {
 		if (c.nodeType === 1) {  // ELEMENT_NODE
-			if (!hasClass(c, opts.styleDisabled)) kernElement(c, dict, opts);
+			if (!hasClass(c, opts.styleDisabled) && !opts.ignoredTags.includes(c.tagName)) {
+				kernElement(c, dict, opts);
+			}
 		} else if (c.nodeType === 3) {  // TEXT_NODE
 			kernTextNode(c, dict, opts);
 		}
