@@ -2,11 +2,12 @@
  * Kerning
  *
  * @author Takuto Yanagida
- * @version 2023-03-30
+ * @version 2024-03-27
  */
 
 function apply(ts, opts = {}) {
 	if (ts.length === 0) return;
+	if (CSS.supports('text-spacing-trim', 'normal')) return;
 
 	opts = Object.assign({
 		styleKerning        : ':ncKern',
